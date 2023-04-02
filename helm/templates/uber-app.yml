@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+		name: uber-app
+		namespace: argocd
+		finalizers:
+			- resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    helm:
+      path: helm
+      repoURL: https://github.com/celtic01/uber-app.github
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: production
+  syncPolicy:
+				selfHeal: true
+				prune: true
