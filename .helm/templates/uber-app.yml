@@ -8,12 +8,15 @@ metadata:
 spec:
   project: default
   source:
+    repoURL: https://github.com/celtic01/uber-app
+    path: helm
     helm:
-      path: helm
-      repoURL: https://github.com/celtic01/uber-app.github
+      valueFiles:
+        - values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: production
   syncPolicy:
-    selfHeal: true
-    prune: true
+    automated:
+      prune: true
+      selfHeal: true
